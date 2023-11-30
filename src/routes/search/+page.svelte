@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { navigating } from '$app/stores'
     import { page } from '$app/stores'
     import type { PageData } from './$types';
     export let data: PageData

@@ -12,6 +12,6 @@ export const load = async ({ url }) => {
 	const q = url.searchParams.get('q') ?? '';
 
 	return {
-		items: getCik(10, q)
+		items: getCik(20, q)
 	};
 };

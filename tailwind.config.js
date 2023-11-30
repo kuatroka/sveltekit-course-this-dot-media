@@ -1,9 +1,10 @@
 import { fontFamily } from 'tailwindcss/defaultTheme';
+const colors = require('tailwindcss/colors');
 
 /** @type {import('tailwindcss').Config} */
 const config = {
 	darkMode: ['class'],
-	content: ['./src/**/*.{html,js,svelte,ts}'],
+	content: ['./src/**/*.{html,js,svelte,ts}', './node_modules/layerchart/**/*.{svelte,js}'],
 	safelist: ['dark'],
 	theme: {
 		container: {
@@ -15,6 +16,7 @@ const config = {
 		},
 		extend: {
 			colors: {
+				accent: colors.indigo,
 				border: 'hsl(var(--border) / <alpha-value>)',
 				input: 'hsl(var(--input) / <alpha-value>)',
 				ring: 'hsl(var(--ring) / <alpha-value>)',

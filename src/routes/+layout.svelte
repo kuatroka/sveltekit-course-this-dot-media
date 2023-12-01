@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../app.pcss';
+	// import '../styles.css'
 	import { ModeWatcher } from "mode-watcher";
 	import { Button } from "$lib/components/ui/button";
 	import { Sun, Moon } from "radix-icons-svelte";
@@ -7,7 +8,15 @@
 </script>
 
 <ModeWatcher />
-<div class="grid grid-flow-row justify-end p-2">
+<div class="grid grid-flow-col justify-between p-2">
+	<nav class="flex gap-8">
+		<a href="/">Home</a>
+		<a href="/about">About</a>
+		<a href="/superinvestors">Superinvestors</a>
+		<a href="/characters">Characters</a>
+		<a href="/search">Search</a>
+	</nav>
+
 	<Button on:click={toggleMode} variant="outline" size="icon">
 		<Sun
 		class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
@@ -17,8 +26,17 @@
 		/>
 		<span class="sr-only">Toggle theme</span>
 	</Button>
+	
+	
 </div>
 
-
 <slot />
+
+
+<style>
+
+
+
+
+</style>
 

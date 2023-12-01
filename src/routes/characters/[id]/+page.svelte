@@ -11,13 +11,6 @@
         <title>{character.name}</title>
     </svelte:head>
     
-    <div class="flex gap-8">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/superinvestors">Superinvestors</a>
-        <a href="/characters">Characters</a>
-    </div>
-    
     <h1 class="card-title">{character.name}</h1>
     <Character {...character} />
 

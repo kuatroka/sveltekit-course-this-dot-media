@@ -11,14 +11,6 @@ $: list_cik = data?.entries_cik_md
 </svelte:head>
 
 
-
-<div class="flex gap-8">
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/superinvestors">Superinvestors</a>
-    <a href="/characters">Characters</a>
-</div>
-
 <h1 class="card-title">Superinvestors</h1>
 
 <ul class="flex flex-col gap-4 pl-3 justify-start items-left">

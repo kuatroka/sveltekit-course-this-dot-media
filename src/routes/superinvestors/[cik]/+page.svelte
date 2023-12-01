@@ -10,13 +10,7 @@
         <title>{entries[0].cik}</title>
     </svelte:head>
 
-    
-    <div class="flex gap-8">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/superinvestors">Superinvestors</a>
-        <a href="/characters">Characters</a>
-    </div>
+
     
     <!-- <h1 class="card-title">{cik.quarter}</h1> -->
     <!-- <Character {...character} /> -->

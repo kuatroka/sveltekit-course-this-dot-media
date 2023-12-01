@@ -10,13 +10,6 @@ $: characters = data?.characters
     <title>Characters</title>
 </svelte:head>
 
-<div class="flex gap-8">
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/superinvestors">Superinvestors</a>
-    <a href="/characters">Characters</a>
-</div>
-
 <h1 class="card-title">Characters</h1>
 
 <ul class="py-2 flex flex-col gap-4">

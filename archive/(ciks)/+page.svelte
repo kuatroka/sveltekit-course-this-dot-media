@@ -1,6 +1,5 @@
 <script lang="ts">
-import type { PageServerData } from './$types';
-export let data: PageServerData
+export let data
 
 $: list_cik = data?.entries_cik_md
 

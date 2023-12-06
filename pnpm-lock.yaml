@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@evidence-dev/core-components':
+    specifier: ^2.1.4
+    version: 2.1.4(svelte@4.2.7)
   '@sveltejs/adapter-node':
     specifier: ^1.3.1
     version: 1.3.1(@sveltejs/kit@1.27.6)
@@ -79,6 +82,9 @@ devDependencies:
   svelte:
     specifier: ^4.2.7
     version: 4.2.7
+  svelte-adapter-bun:
+    specifier: ^0.5.1
+    version: 0.5.1
   svelte-check:
     specifier: ^3.6.2
     version: 3.6.2(postcss-load-config@4.0.2)(postcss@8.4.31)(svelte@4.2.7)
@@ -539,6 +545,50 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
+  /@evidence-dev/component-utilities@1.2.2:
+    resolution: {integrity: sha512-DagBXppTtoN03cv/+CkRRYouBAHE+0cHAc/xrx8G43MlaH9mw732i3jFmrqZghX1zCpliMOTqGyKzkmTfB2Zuw==}
+    dependencies:
+      '@tidyjs/tidy': 2.4.4
+      debounce: 1.2.1
+      downloadjs: 1.4.7
+      echarts: 5.4.3
+      ssf: 0.11.2
+      svelte: 3.55.0
+    dev: false
+
+  /@evidence-dev/core-components@2.1.4(svelte@4.2.7):
+    resolution: {integrity: sha512-U8en8bCchZBaogVSrEFr+FG4HZUd9CDPSfvZy9y/+uRtzJry13H4uIFc289C9V+//SEsDXGN6TabQuxEUVzh3w==}
+    peerDependencies:
+      svelte: ^3.54.0
+    dependencies:
+      '@evidence-dev/component-utilities': 1.2.2
+      '@evidence-dev/tailwind': 1.1.0
+      '@rgossiaux/svelte-headlessui': 2.0.0(svelte@4.2.7)
+      '@steeze-ui/heroicons': 2.2.3
+      '@steeze-ui/simple-icons': 1.6.0
+      '@steeze-ui/svelte-icon': 1.5.0(svelte@4.2.7)
+      '@steeze-ui/tabler-icons': 2.1.1
+      echarts: 5.4.3
+      echarts-stat: 1.2.0
+      export-to-csv: 0.2.1
+      fuse.js: 7.0.0
+      prismjs: 1.29.0
+      ssf: 0.11.2
+      svelte: 4.2.7
+      svelte-tiny-linked-charts: 1.1.5
+      tua-body-scroll-lock: 1.4.0
+    transitivePeerDependencies:
+      - ts-node
+    dev: false
+
+  /@evidence-dev/tailwind@1.1.0:
+    resolution: {integrity: sha512-uu/OQtLEMq7bQykA6NOeCerv5XdKtDW4RwlIs2Pt7tWfRwIphLSwCtA46ZFq+tCfGoxHGJyQL/6s6CA+nlq5lg==}
+    dependencies:
+      tailwindcss: 3.3.5
+    transitivePeerDependencies:
+      - ts-node
+    dev: false
+
   /@fastify/busboy@2.1.0:
     resolution: {integrity: sha512-+KpH+QxZU7O4675t3mnkQKcZZg56u+K/Ct2K+N2AZYNVK8kyeo/bI18tI8aPm3tvNNRyTWfj6s5tnGNlcbQRsA==}
     engines: {node: '>=14'}
@@ -731,6 +781,14 @@ packages:
   /@polka/url@1.0.0-next.23:
     resolution: {integrity: sha512-C16M+IYz0rgRhWZdCmK+h58JMv8vijAA61gmz2rspCSwKwzBebpdcsiUmwrtJRdphuY30i6BSLEOP8ppbNLyLg==}
 
+  /@rgossiaux/svelte-headlessui@2.0.0(svelte@4.2.7):
+    resolution: {integrity: sha512-ksh245HqMM8yqkzd/OyAK2FCHZYOSA3ldLIHab7C9S60FmifqT24JFVgi8tZpsDEMk3plbfQvfah93n5IEi8sg==}
+    peerDependencies:
+      svelte: ^3.47.0
+    dependencies:
+      svelte: 4.2.7
+    dev: false
+
   /@rollup/plugin-commonjs@25.0.7(rollup@3.29.4):
     resolution: {integrity: sha512-nEvcR+LRjEjsaSsc4x3XZfCCvZIaSMenZu/OiwOKGN2UhQpAYI7ru7czFvyWbErlpoGjnSX3D5Ch5FcMA3kRWQ==}
     engines: {node: '>=14.0.0'}
@@ -830,6 +888,26 @@ packages:
       rollup: 3.29.4
     dev: false
 
+  /@steeze-ui/heroicons@2.2.3:
+    resolution: {integrity: sha512-bv4YK375U9TDS50SmJ5VdFy2UmMhgKbJCCbo6IUU3qs2luEj2VX6sQoDy96j8AIKttxMd62ih1j0lZj7CTjIfA==}
+    dev: false
+
+  /@steeze-ui/simple-icons@1.6.0:
+    resolution: {integrity: sha512-Mi6J1Ydo7CFGTqDcXL2/nHqjE0gUON8ehv7ziyS/HJccNLI27if9FRa7oUqhE84RogcLxqftfD7MGxO6nFlNBA==}
+    dev: false
+
+  /@steeze-ui/svelte-icon@1.5.0(svelte@4.2.7):
+    resolution: {integrity: sha512-Y0S7Qk2kO6byzOlD5SQGbOF2ZaKXJgfTkH78QUPcq579wiWMQJ5H14zL4XwtsPJ0DfkoL5qa3WaIdYkWb9A6AA==}
+    peerDependencies:
+      svelte: ^4.0.0
+    dependencies:
+      svelte: 4.2.7
+    dev: false
+
+  /@steeze-ui/tabler-icons@2.1.1:
+    resolution: {integrity: sha512-cWnORbuPwXhsrH3hebxZ0gSF/zMZEuLz014XoGcxXhU+GPYixqXjyBbTfJiGjbexRjkj7A2/1ocx6AcWEwN1Pw==}
+    dev: false
+
   /@sveltejs/adapter-auto@2.1.1(@sveltejs/kit@1.27.6):
     resolution: {integrity: sha512-nzi6x/7/3Axh5VKQ8Eed3pYxastxoa06Y/bFhWb7h3Nu+nGRVxKAy3+hBJgmPCwWScy8n0TsstZjSVKfyrIHkg==}
     peerDependencies:
@@ -916,6 +994,13 @@ packages:
     resolution: {integrity: sha512-FaruWX6KdudYloq1AHD/4nU+UsMTdNE8CKyrseXWEcgjDAbvkwJg2QGPAnfIJLIWsjZOSPLOAykK6fuYp4vp4A==}
     dependencies:
       tslib: 2.6.2
+    dev: false
+
+  /@tidyjs/tidy@2.4.4:
+    resolution: {integrity: sha512-FGsIoajwkn/5DQCAgry5Vi8yh5vHkqm2k9hz1QmqpC5jY8HA/DI4Kt+x9RDc1tfWDOFq3AdqiD/y6YODN5Ii2Q==}
+    dependencies:
+      d3-array: 2.12.1
+      ts-toolbelt: 8.4.0
     dev: false
 
   /@tootallnate/once@2.0.0:
@@ -1838,6 +1923,10 @@ packages:
       '@babel/runtime': 7.23.4
     dev: false
 
+  /debounce@1.2.1:
+    resolution: {integrity: sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==}
+    dev: false
+
   /debug@4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
     engines: {node: '>=6.0'}
@@ -1951,6 +2040,10 @@ packages:
       esutils: 2.0.3
     dev: true
 
+  /downloadjs@1.4.7:
+    resolution: {integrity: sha512-LN1gO7+u9xjU5oEScGFKvXhYf7Y/empUIIEAGBs1LzUq/rg5duiDrkuH5A2lQGd5jfMOb9X9usDa2oVXwJ0U/Q==}
+    dev: false
+
   /duckdb@0.9.2:
     resolution: {integrity: sha512-POZ37Vf5cHVmk4W8z0PsdGi67VeQsr9HRrBbmivDt9AQ8C1XLESVE79facydbroNiqm7+n7fx6jqjyxyrBFYlQ==}
     requiresBuild: true
@@ -1962,6 +2055,17 @@ packages:
       - bluebird
       - encoding
       - supports-color
+    dev: false
+
+  /echarts-stat@1.2.0:
+    resolution: {integrity: sha512-zLd7Kgs+tuTSeaK0VQEMNmnMivEkhvHIk1gpBtLzpRerfcIQ+Bd5XudOMmtwpaTc1WDZbA7d1V//iiBccR46Qg==}
+    dev: false
+
+  /echarts@5.4.3:
+    resolution: {integrity: sha512-mYKxLxhzy6zyTi/FaEbJMOZU1ULGEQHaeIeuMR5L+JnJTpz+YR03mnnpBhbR4+UYJAgiXgpyTVLffPAjOTLkZA==}
+    dependencies:
+      tslib: 2.3.0
+      zrender: 5.4.4
     dev: false
 
   /electron-to-chromium@1.4.594:
@@ -2295,6 +2399,10 @@ packages:
     resolution: {integrity: sha512-dX7e/LHVJ6W3DE1MHWi9S1EYzDESENfLrYohG2G++ovZrYOkm4Knwa0mc1cn84xJOR4KEU0WSchhLbd0UklbHw==}
     dev: false
 
+  /export-to-csv@0.2.1:
+    resolution: {integrity: sha512-KTbrd3CAZ0cFceJEZr1e5uiMasabeCpXq1/5uvVxDl53o4jXJHnltasQoj2NkzrxD8hU9kdwjnMhoir/7nNx/A==}
+    dev: false
+
   /extendable-error@0.1.7:
     resolution: {integrity: sha512-UOiS2in6/Q0FK0R0q6UY9vYpQ21mr/Qn1KOnte7vsACuNJf514WvCCUHSRCPcgjPT2bAhNIJdlE6bVap1GKmeg==}
     dev: false
@@ -2405,6 +2513,11 @@ packages:
       is-callable: 1.2.7
     dev: false
 
+  /frac@1.1.2:
+    resolution: {integrity: sha512-w/XBfkibaTl3YDqASwfDUqkna4Z2p9cFSr1aHDt0WoMTECnRfBOv2WArlZILlqgWlmdIlALXGpM2AOhEk5W3IA==}
+    engines: {node: '>=0.8'}
+    dev: false
+
   /fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: true
@@ -2463,6 +2576,11 @@ packages:
 
   /functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
+    dev: false
+
+  /fuse.js@7.0.0:
+    resolution: {integrity: sha512-14F4hBIxqKvD4Zz/XjDc3y94mNZN6pRv3U13Udo0lNLCWRBUsrMv2xwcF/y/Z5sV6+FQW+/ow68cHpm4sunt8Q==}
+    engines: {node: '>=10'}
     dev: false
 
   /gauge@3.0.2:
@@ -4440,6 +4558,13 @@ packages:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
     dev: false
 
+  /ssf@0.11.2:
+    resolution: {integrity: sha512-+idbmIXoYET47hH+d7dfm2epdOMUDjqcB4648sTZ+t2JwoyBFL/insLfB/racrDmsKB3diwsDA696pZMieAC5g==}
+    engines: {node: '>=0.8'}
+    dependencies:
+      frac: 1.1.2
+    dev: false
+
   /ssri@9.0.1:
     resolution: {integrity: sha512-o57Wcn66jMQvfHG1FlYbWeZWW/dHZhJXjpIcTfXldXEk5nz5lStPo3mK0OJQfGR3RbZUlbISexbljkJzuEj/8Q==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
@@ -4580,6 +4705,12 @@ packages:
       - stylus
       - sugarss
     dev: false
+
+  /svelte-adapter-bun@0.5.1:
+    resolution: {integrity: sha512-eLbkKuoCaZPzVN20dg/oZOUybO16oEQCOQuzAI2jVLU90VbJ1P099bAlA+7H4KPGI2r2sdkfD1MppGAbk7PdMw==}
+    dependencies:
+      tiny-glob: 0.2.9
+    dev: true
 
   /svelte-check@3.6.2(postcss-load-config@4.0.2)(postcss@8.4.31)(svelte@4.2.7):
     resolution: {integrity: sha512-E6iFh4aUCGJLRz6QZXH3gcN/VFfkzwtruWSRmlKrLWQTiO6VzLsivR6q02WYLGNAGecV3EocqZuCDrC2uttZ0g==}
@@ -4735,6 +4866,10 @@ packages:
       typescript: 5.3.2
     dev: true
 
+  /svelte-tiny-linked-charts@1.1.5:
+    resolution: {integrity: sha512-27AlRKnz82GfswxoLkNjFtn1+C10bkpZb4kRH7d3qQVbgLLgNJY2ICSuWa+49Qh6jDFn6e/+qx3wWIz8kMmMkA==}
+    dev: false
+
   /svelte-ux@0.56.0(@fortawesome/free-regular-svg-icons@6.4.2)(@fortawesome/free-solid-svg-icons@6.4.2)(@mdi/js@7.3.67)(prism-svelte@0.5.0)(prism-themes@1.9.0)(prismjs@1.29.0)(sveld@0.18.1)(svelte@4.2.7):
     resolution: {integrity: sha512-OIQzVxPchQaq1K3ARLBEAr83WsAh6PJztU7p6ZLsTqhVbRD57aISW2IUZCvDklH2DczGwJokPfh/E1rY1Zl61w==}
     peerDependencies:
@@ -4769,6 +4904,11 @@ packages:
       svelte: 4.2.7
       tailwind-merge: 2.0.0
       zod: 3.22.4
+    dev: false
+
+  /svelte@3.55.0:
+    resolution: {integrity: sha512-uGu2FVMlOuey4JoKHKrpZFkoYyj0VLjJdz47zX5+gVK5odxHM40RVhar9/iK2YFRVxvfg9FkhfVlR0sjeIrOiA==}
+    engines: {node: '>= 8'}
     dev: false
 
   /svelte@3.59.2:
@@ -4956,6 +5096,14 @@ packages:
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
+  /ts-toolbelt@8.4.0:
+    resolution: {integrity: sha512-hnGJXIgC49ZuF5g5oDthoge8t4cvT0dYg2pYO5C6yV/HmUUy1koooU2U/5K2N+Uw++hcXQpJAToLRa+GRp28Sg==}
+    dev: false
+
+  /tslib@2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+    dev: false
+
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
@@ -4971,6 +5119,10 @@ packages:
       strip-ansi: 6.0.1
       wcwidth: 1.0.1
       yargs: 17.7.2
+    dev: false
+
+  /tua-body-scroll-lock@1.4.0:
+    resolution: {integrity: sha512-pbl411d7RSxjYXt5pB5GdBQ5BraVg1PMvr8BSUXc4buCMeK1OYu7L10PuOU8EhdfWoxGiAfvLrioSQe6Cr9m1g==}
     dev: false
 
   /tunnel-agent@0.6.0:
@@ -5350,4 +5502,10 @@ packages:
 
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
+    dev: false
+
+  /zrender@5.4.4:
+    resolution: {integrity: sha512-0VxCNJ7AGOMCWeHVyTrGzUgrK4asT4ml9PEkeGirAkKNYXYzoPJCLvmyfdoOXcjTHPs10OZVMfD1Rwg16AZyYw==}
+    dependencies:
+      tslib: 2.3.0
     dev: false

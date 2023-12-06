@@ -10,7 +10,12 @@ export type Cik = {
 	cik_name: string;
 	cik_ticker: string;
 	cik_ticker_name: string;
-	cum_mean_twrr: number;
+	cum_twrr: number;
+	curr_twrr: number;
+	num_assets: number;
+	value: number;
+	quarter: string;
+	link: string;
 };
 
 export type Cusip = {

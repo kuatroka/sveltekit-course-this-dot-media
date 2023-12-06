@@ -1,5 +1,5 @@
 <script lang="ts">
-    import '../../app.pcss';
+    import '../app.pcss';
     import { ModeWatcher } from "mode-watcher";
 	import { Button } from "$lib/components/ui/button";
 	import { Sun, Moon } from "radix-icons-svelte";
@@ -12,6 +12,8 @@
 	<nav class="flex gap-8">
 		<a href="/">Home</a>
 		<a href="/about">About</a>
+		<a href="/superinvestors">Superinvestors</a>
+		<a href="/search">Search</a>
 	</nav>
 
 	<Button on:click={toggleMode} variant="outline" size="icon">

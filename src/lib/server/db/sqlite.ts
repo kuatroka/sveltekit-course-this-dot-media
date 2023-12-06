@@ -10,7 +10,8 @@ export function getCik(limit = 20000, q?: string): Cik[] {
     l.cik AS cik,
     last_quarter,
     l.cik_name AS cik_name,
-	cum_mean_twrr
+	cum_mean_twrr,
+	'/superinvestors/' || l.cik  || '/' || last_quarter as link
     FROM 
     (SELECT cik, cik_name
     	FROM cik_md) l
@@ -25,8 +26,28 @@ export function getCik(limit = 20000, q?: string): Cik[] {
     `;
 	const stmnt = db.prepare(sql);
 	const rows = stmnt.all({ limit, q });
+	console.log(rows.slice(0, 2));
+	console.log(rows.length);
 	return rows as Cik[];
-	// console.log(rows.slice(0, 2))
+}
+
+export function getCikDetails(cik?: string, quarter?: string): Cik[] {
+	const sql = `
+    SELECT
+		cik,
+		quarter,
+		ttl_value_per_cik_per_qtr AS value,
+		num_assets_per_cik_per_qtr AS num_assets,
+		mean_curr_twrr_per_cik_per_qtr_cons AS curr_twrr,
+		cum_mean_twrr_per_cik_per_qtr_cons AS cum_twrr
+		FROM every_cik_qtr_twrr
+		WHERE cik  = $cik AND quarter = $quarter
+    `;
+	const stmnt = db.prepare(sql);
+	const rows = stmnt.all({ cik, quarter });
+	console.log(rows.slice(0, 2));
+	console.log(rows.length);
+	return rows as Cik[];
 }
 
 export function getCusip(limit = 15000): Cusip[] {
@@ -40,8 +61,8 @@ export function getCusip(limit = 15000): Cusip[] {
     `;
 	const stmnt = db.prepare(sql);
 	const rows = stmnt.all({ limit });
-	return rows as Cusip[];
 	console.log(rows.slice(0, 2));
+	return rows as Cusip[];
 }
 
 /////////////////

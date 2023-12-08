@@ -18,8 +18,8 @@ dependencies:
     specifier: ^9.1.1
     version: 9.1.1
   bits-ui:
-    specifier: ^0.9.8
-    version: 0.9.8(svelte@4.2.7)
+    specifier: ^0.11.5
+    version: 0.11.5(svelte@4.2.7)
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
@@ -28,7 +28,7 @@ dependencies:
     version: 0.9.2
   layerchart:
     specifier: ^0.26.2
-    version: 0.26.2(@fortawesome/free-regular-svg-icons@6.4.2)(@fortawesome/free-solid-svg-icons@6.4.2)(prism-svelte@0.5.0)(prism-themes@1.9.0)(prismjs@1.29.0)(sveld@0.18.1)(svelte@4.2.7)(typescript@5.3.2)
+    version: 0.26.2(@fortawesome/free-regular-svg-icons@6.5.1)(@fortawesome/free-solid-svg-icons@6.5.1)(prism-svelte@0.5.0)(prism-themes@1.9.0)(prismjs@1.29.0)(sveld@0.18.1)(svelte@4.2.7)(typescript@5.3.2)
   mode-watcher:
     specifier: ^0.1.1
     version: 0.1.1(svelte@4.2.7)
@@ -88,6 +88,9 @@ devDependencies:
   svelte-check:
     specifier: ^3.6.2
     version: 3.6.2(postcss-load-config@4.0.2)(postcss@8.4.31)(svelte@4.2.7)
+  svelte-headless-table:
+    specifier: ^0.17.7
+    version: 0.17.7(svelte@4.2.7)
   tailwindcss:
     specifier: ^3.3.5
     version: 3.3.5
@@ -616,20 +619,26 @@ packages:
     requiresBuild: true
     dev: false
 
-  /@fortawesome/free-regular-svg-icons@6.4.2:
-    resolution: {integrity: sha512-0+sIUWnkgTVVXVAPQmW4vxb9ZTHv0WstOa3rBx9iPxrrrDH6bNLsDYuwXF9b6fGm+iR7DKQvQshUH/FJm3ed9Q==}
+  /@fortawesome/fontawesome-common-types@6.5.1:
+    resolution: {integrity: sha512-GkWzv+L6d2bI5f/Vk6ikJ9xtl7dfXtoRu3YGE6nq0p/FFqA1ebMOAWg3XgRyb0I6LYyYkiAo+3/KrwuBp8xG7A==}
     engines: {node: '>=6'}
     requiresBuild: true
-    dependencies:
-      '@fortawesome/fontawesome-common-types': 6.4.2
     dev: false
 
-  /@fortawesome/free-solid-svg-icons@6.4.2:
-    resolution: {integrity: sha512-sYwXurXUEQS32fZz9hVCUUv/xu49PEJEyUOsA51l6PU/qVgfbTb2glsTEaJngVVT8VqBATRIdh7XVgV1JF1LkA==}
+  /@fortawesome/free-regular-svg-icons@6.5.1:
+    resolution: {integrity: sha512-m6ShXn+wvqEU69wSP84coxLbNl7sGVZb+Ca+XZq6k30SzuP3X4TfPqtycgUh9ASwlNh5OfQCd8pDIWxl+O+LlQ==}
     engines: {node: '>=6'}
     requiresBuild: true
     dependencies:
-      '@fortawesome/fontawesome-common-types': 6.4.2
+      '@fortawesome/fontawesome-common-types': 6.5.1
+    dev: false
+
+  /@fortawesome/free-solid-svg-icons@6.5.1:
+    resolution: {integrity: sha512-S1PPfU3mIJa59biTtXJz1oI0+KAXW6bkAb31XKhxdxtuXDiUIFsih4JR1v5BbxY7hVHsD1RKq+jRkVRaf773NQ==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 6.5.1
     dev: false
 
   /@gar/promisify@1.1.3:
@@ -729,8 +738,8 @@ packages:
     resolution: {integrity: sha512-MnRjknFqpTC6FifhGHjZ0+QYq2bAkZFQqIj8JA2AdPZbBxUvr8QSgB2yPAJ8/ob/XkR41xlg5majDR3c1JP1hw==}
     dev: false
 
-  /@melt-ui/svelte@0.61.2(svelte@4.2.7):
-    resolution: {integrity: sha512-BHkD9G31zQBToA4euDRBgTQRvWxT9scufOVCXgDO6HKTvyxFspbWT2bgiSFqAK4BbAGDn9Ao36Q8F9O71KN4OQ==}
+  /@melt-ui/svelte@0.64.5(svelte@4.2.7):
+    resolution: {integrity: sha512-nPQA2guLuLitpZ6A968eWyGMC2riTKLq4R26hPRLdzP/JHCpd9yvddgMwil8JKbUKjT2dC3i358vUqeUOGxknA==}
     peerDependencies:
       svelte: '>=3 <5'
     dependencies:
@@ -1058,6 +1067,12 @@ packages:
       undici-types: 5.26.5
     dev: false
 
+  /@types/node@20.10.4:
+    resolution: {integrity: sha512-D08YG6rr8X90YB56tSIuBaddy/UXAA9RKJoFvrsnogAum/0pmjkgi4+2nx96A330FmioegBWmEYQ+syqCFaveg==}
+    dependencies:
+      undici-types: 5.26.5
+    dev: false
+
   /@types/normalize-package-data@2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
     dev: false
@@ -1068,7 +1083,7 @@ packages:
   /@types/resolve@1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
     dependencies:
-      '@types/node': 20.10.0
+      '@types/node': 20.10.4
     dev: false
 
   /@types/resolve@1.20.2:
@@ -1451,13 +1466,14 @@ packages:
       file-uri-to-path: 1.0.0
     dev: false
 
-  /bits-ui@0.9.8(svelte@4.2.7):
-    resolution: {integrity: sha512-cjuurfmqEIhQy51uOY370ihAN/oPxZXT7ifa7CAf3G+Ft2G4ucJKk3xM3Mq1AidJn4zCoDOjr8EW+VOJtcS0+g==}
+  /bits-ui@0.11.5(svelte@4.2.7):
+    resolution: {integrity: sha512-kpWdsLjai2WXIz2hRBRVG8ZqbZ+NFuegCfH4pL7u0kfz08DUFGGTY5VplKuQhvMtw+NiiFyv6gswlJHkYtdhVg==}
     peerDependencies:
       svelte: ^4.0.0
     dependencies:
-      '@melt-ui/svelte': 0.61.2(svelte@4.2.7)
-      nanoid: 5.0.3
+      '@internationalized/date': 3.5.0
+      '@melt-ui/svelte': 0.64.5(svelte@4.2.7)
+      nanoid: 5.0.4
       svelte: 4.2.7
     dev: false
 
@@ -3186,7 +3202,7 @@ packages:
       typescript: 5.3.2
     dev: false
 
-  /layerchart@0.26.2(@fortawesome/free-regular-svg-icons@6.4.2)(@fortawesome/free-solid-svg-icons@6.4.2)(prism-svelte@0.5.0)(prism-themes@1.9.0)(prismjs@1.29.0)(sveld@0.18.1)(svelte@4.2.7)(typescript@5.3.2):
+  /layerchart@0.26.2(@fortawesome/free-regular-svg-icons@6.5.1)(@fortawesome/free-solid-svg-icons@6.5.1)(prism-svelte@0.5.0)(prism-themes@1.9.0)(prismjs@1.29.0)(sveld@0.18.1)(svelte@4.2.7)(typescript@5.3.2):
     resolution: {integrity: sha512-ZyP96uQ/qgucfh5VIQMtudlqnte2caYj1A+b8XlfErlEO3pjJHw0uhZ1rGo0sqSXBVbAtJhPYa//JiPliwS3Yw==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0
@@ -3215,7 +3231,7 @@ packages:
       lodash-es: 4.17.21
       shapefile: 0.6.6
       svelte: 4.2.7
-      svelte-ux: 0.56.0(@fortawesome/free-regular-svg-icons@6.4.2)(@fortawesome/free-solid-svg-icons@6.4.2)(@mdi/js@7.3.67)(prism-svelte@0.5.0)(prism-themes@1.9.0)(prismjs@1.29.0)(sveld@0.18.1)(svelte@4.2.7)
+      svelte-ux: 0.56.0(@fortawesome/free-regular-svg-icons@6.5.1)(@fortawesome/free-solid-svg-icons@6.5.1)(@mdi/js@7.3.67)(prism-svelte@0.5.0)(prism-themes@1.9.0)(prismjs@1.29.0)(sveld@0.18.1)(svelte@4.2.7)
       topojson-client: 3.1.0
     transitivePeerDependencies:
       - '@fortawesome/free-regular-svg-icons'
@@ -3544,8 +3560,8 @@ packages:
     hasBin: true
     dev: false
 
-  /nanoid@5.0.3:
-    resolution: {integrity: sha512-I7X2b22cxA4LIHXPSqbBCEQSL+1wv8TuoefejsX4HFWyC6jc5JG7CEaxOltiKjc1M+YCS2YkrZZcj4+dytw9GA==}
+  /nanoid@5.0.4:
+    resolution: {integrity: sha512-vAjmBf13gsmhXSgBrtIclinISzFFy22WwCYoyilZlsrRXNIHSwgFQ1bEdjRwMT3aoadeIF6HMuDRlOxzfXV8ig==}
     engines: {node: ^18 || >=20}
     hasBin: true
     dev: false
@@ -4249,7 +4265,7 @@ packages:
     resolution: {integrity: sha512-IXgzBWvWQwE6PrDI05OvmXUIruQTcoMDzRsOd5CDvHCVLcLHMTSYvOK5Cm46kWqlV3yAbuSpBZdJ5oP5OUoStg==}
     dev: false
 
-  /rollup-plugin-svelte@7.1.6(rollup@2.79.1)(svelte@3.59.2):
+  /rollup-plugin-svelte@7.1.6(rollup@2.79.1)(svelte@3.55.0):
     resolution: {integrity: sha512-nVFRBpGWI2qUY1OcSiEEA/kjCY2+vAjO9BI8SzA7NRrh2GTunLd6w2EYmnMt/atgdg8GvcNjLsmZmbQs/u4SQA==}
     engines: {node: '>=10'}
     peerDependencies:
@@ -4259,7 +4275,7 @@ packages:
       '@rollup/pluginutils': 4.2.1
       resolve.exports: 2.0.2
       rollup: 2.79.1
-      svelte: 3.59.2
+      svelte: 3.55.0
     dev: false
 
   /rollup@2.79.1:
@@ -4689,9 +4705,9 @@ packages:
       fast-glob: 3.3.2
       prettier: 2.8.8
       rollup: 2.79.1
-      rollup-plugin-svelte: 7.1.6(rollup@2.79.1)(svelte@3.59.2)
-      svelte: 3.59.2
-      svelte-preprocess: 4.10.7(postcss-load-config@4.0.2)(postcss@8.4.31)(svelte@3.59.2)(typescript@4.9.5)
+      rollup-plugin-svelte: 7.1.6(rollup@2.79.1)(svelte@3.55.0)
+      svelte: 3.55.0
+      svelte-preprocess: 4.10.7(postcss-load-config@4.0.2)(postcss@8.4.31)(svelte@3.55.0)(typescript@4.9.5)
       typescript: 4.9.5
     transitivePeerDependencies:
       - '@babel/core'
@@ -4756,6 +4772,17 @@ packages:
       svelte: 4.2.7
     dev: true
 
+  /svelte-headless-table@0.17.7(svelte@4.2.7):
+    resolution: {integrity: sha512-GRQEM0c4pXfFs6W+LGbsvrBbDqBaMxxibsWq8Q8o4ve4dTHIC9WsbuKMP3jRHl+iC9jd4K/TXJfLJHtLzuKSQA==}
+    peerDependencies:
+      svelte: ^3 || ^4
+    dependencies:
+      svelte: 4.2.7
+      svelte-keyed: 1.1.7(svelte@4.2.7)
+      svelte-render: 1.6.1(svelte@4.2.7)
+      svelte-subscribe: 1.0.6(svelte@4.2.7)
+    dev: true
+
   /svelte-hmr@0.15.3(svelte@4.2.7):
     resolution: {integrity: sha512-41snaPswvSf8TJUhlkoJBekRrABDXDMdpNpT2tfHIv4JuhgvHqLMhEPGtaQn0BmbNSTkuz2Ed20DF2eHw0SmBQ==}
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
@@ -4764,7 +4791,15 @@ packages:
     dependencies:
       svelte: 4.2.7
 
-  /svelte-preprocess@4.10.7(postcss-load-config@4.0.2)(postcss@8.4.31)(svelte@3.59.2)(typescript@4.9.5):
+  /svelte-keyed@1.1.7(svelte@4.2.7):
+    resolution: {integrity: sha512-d3VIwBza12PIQ0mXf8js+r4xoSFiQikDobbi6hx03oQzZx0BImXCBcdsZeYEN7VrNswXcjIrhc9qqjlxcro49w==}
+    peerDependencies:
+      svelte: ^3.49.0 || ^4
+    dependencies:
+      svelte: 4.2.7
+    dev: true
+
+  /svelte-preprocess@4.10.7(postcss-load-config@4.0.2)(postcss@8.4.31)(svelte@3.55.0)(typescript@4.9.5):
     resolution: {integrity: sha512-sNPBnqYD6FnmdBrUmBCaqS00RyCsCpj2BG58A1JBswNF7b0OKviwxqVrOL/CKyJrLSClrSeqQv5BXNg2RUbPOw==}
     engines: {node: '>= 9.11.2'}
     requiresBuild: true
@@ -4813,7 +4848,7 @@ packages:
       postcss-load-config: 4.0.2(postcss@8.4.31)
       sorcery: 0.10.0
       strip-indent: 3.0.0
-      svelte: 3.59.2
+      svelte: 3.55.0
       typescript: 4.9.5
     dev: false
 
@@ -4866,11 +4901,28 @@ packages:
       typescript: 5.3.2
     dev: true
 
+  /svelte-render@1.6.1(svelte@4.2.7):
+    resolution: {integrity: sha512-pn580Z6DtxIDrXqQaGR/7z8tdHasgURn1AG5tt4ym1PfE6qFjT27NpN6vIg5kvDl1ewK9pYeTfIWPw4pPXqyuw==}
+    peerDependencies:
+      svelte: ^3 || ^4
+    dependencies:
+      svelte: 4.2.7
+      svelte-subscribe: 1.0.6(svelte@4.2.7)
+    dev: true
+
+  /svelte-subscribe@1.0.6(svelte@4.2.7):
+    resolution: {integrity: sha512-legaLPjOGAN3G6xUa8+1ms3qo3lE4nfypZe1CedyOEoUUwWPfmzJHuBXtwdro4xUf4kezUbzjtyK1UOeZDksog==}
+    peerDependencies:
+      svelte: ^3 || ^4
+    dependencies:
+      svelte: 4.2.7
+    dev: true
+
   /svelte-tiny-linked-charts@1.1.5:
     resolution: {integrity: sha512-27AlRKnz82GfswxoLkNjFtn1+C10bkpZb4kRH7d3qQVbgLLgNJY2ICSuWa+49Qh6jDFn6e/+qx3wWIz8kMmMkA==}
     dev: false
 
-  /svelte-ux@0.56.0(@fortawesome/free-regular-svg-icons@6.4.2)(@fortawesome/free-solid-svg-icons@6.4.2)(@mdi/js@7.3.67)(prism-svelte@0.5.0)(prism-themes@1.9.0)(prismjs@1.29.0)(sveld@0.18.1)(svelte@4.2.7):
+  /svelte-ux@0.56.0(@fortawesome/free-regular-svg-icons@6.5.1)(@fortawesome/free-solid-svg-icons@6.5.1)(@mdi/js@7.3.67)(prism-svelte@0.5.0)(prism-themes@1.9.0)(prismjs@1.29.0)(sveld@0.18.1)(svelte@4.2.7):
     resolution: {integrity: sha512-OIQzVxPchQaq1K3ARLBEAr83WsAh6PJztU7p6ZLsTqhVbRD57aISW2IUZCvDklH2DczGwJokPfh/E1rY1Zl61w==}
     peerDependencies:
       '@fortawesome/free-regular-svg-icons': ^6.2.1
@@ -4885,8 +4937,8 @@ packages:
       '@changesets/cli': 2.26.2
       '@floating-ui/dom': 1.5.3
       '@fortawesome/fontawesome-common-types': 6.4.2
-      '@fortawesome/free-regular-svg-icons': 6.4.2
-      '@fortawesome/free-solid-svg-icons': 6.4.2
+      '@fortawesome/free-regular-svg-icons': 6.5.1
+      '@fortawesome/free-solid-svg-icons': 6.5.1
       '@mdi/js': 7.3.67
       '@vercel/analytics': 1.1.1
       clsx: 2.0.0
@@ -4908,11 +4960,6 @@ packages:
 
   /svelte@3.55.0:
     resolution: {integrity: sha512-uGu2FVMlOuey4JoKHKrpZFkoYyj0VLjJdz47zX5+gVK5odxHM40RVhar9/iK2YFRVxvfg9FkhfVlR0sjeIrOiA==}
-    engines: {node: '>= 8'}
-    dev: false
-
-  /svelte@3.59.2:
-    resolution: {integrity: sha512-vzSyuGr3eEoAtT/A6bmajosJZIUWySzY2CzB3w2pgPvnkUjGqlDnsNnA0PMO+mMAhuyMul6C2uuZzY6ELSkzyA==}
     engines: {node: '>= 8'}
     dev: false
 

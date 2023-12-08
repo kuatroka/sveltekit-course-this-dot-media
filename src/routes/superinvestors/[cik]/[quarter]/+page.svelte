@@ -1,23 +1,34 @@
 <script lang="ts">
-    import type { PageData } from './$types';
-    import { page } from '$app/stores';
-	import { DataTable } from '@evidence-dev/core-components';
+    import type { PageServerData } from './$types';
+    export let data:    PageServerData
     
-    export let data: PageData;
-    $: ciks_entries = data.entries_cikDetails;
-    // $: ciks_entries_par = data.ciks_entries;
-</script>
+    let entries = data?.entries_cik
+    
+    </script>
+    
+    <svelte:head>
+        <title>{entries[0].cik}</title>
+    </svelte:head>
 
-<h1>{$page.params.cik}</h1>
-<h1>{$page.params.quarter}</h1>
-<!-- <div>{@html data.page_params.quarter}</div> -->
 
-<!-- <DataTable data={ciks_entries} headerColor="red" search={true}/> -->
-<br>
+    
+    <!-- <h1 class="card-title">{cik.quarter}</h1> -->
+    <!-- <Character {...character} /> -->
 
-<ul class="p-2 flex flex-col gap-1">
-    {#each ciks_entries as entry}
-    <li>
-            <span>{entry.cik} -- {entry.quarter} -- {entry.curr_twrr} -- {entry.value} % TWRR</span>
-    {/each}
+    <h1 class="card-title">Superinvestor Overview</h1>
+
+    <ul>
+        {#each entries as entry}
+            <li>{entry.cik} - {entry.quarter}</li>
+        {/each}
     </ul>
+    
+    
+    
+    
+    
+    
+    
+    <style>
+    
+    </style>

@@ -4,7 +4,7 @@
     export let data: PageData;
 
 	let pageSize = 10;
-	$: totalItems = 12719;
+	$: totalItems = 120;
 	$: totalPages = Math.ceil(totalItems / pageSize);
 	$: currentPage = Number($page.params.page) - 1
 </script>
@@ -19,7 +19,6 @@
 <br>
 <div class="pagination">
     {#each Array(totalPages) as _, idx}
-    <!-- <p>{idx}</p>     -->
     <a
 			href="/pagination-ssr-cik/{idx +1}"
 			class={currentPage === idx ? 'text-emerald-300' : ''}>
@@ -29,4 +28,4 @@
     {/each}
 </div>
 
-<p>Page: {currentPage + 1}</p>
+<!-- <p>Page: {currentPage + 1}</p> -->

@@ -1,9 +1,12 @@
-import type { PageServerLoad } from './$types';
-import { getCik, getCikDetails } from '$lib/server/db/sqlite';
+import { getCik } from '$lib/server/db/sqlite';
+// import { main } from '$lib/server/db/duckdb-wasm';
 
-export const load = (async () => {
-	const limit = 20;
+export const load = async ({ url }) => {
+	const limit = Number(url.searchParams.get('limit')) || 5;
+	const skip = Number(url.searchParams.get('skip')) || 0;
+	const q = url.searchParams.get('q') ?? '';
+
 	return {
-		entries_cik: getCik(limit)
+		ciks: getCik(limit, q, skip)
 	};
-}) satisfies PageServerLoad;
+};

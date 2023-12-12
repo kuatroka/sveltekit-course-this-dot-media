@@ -24,17 +24,17 @@ export function getCik(limit: number = 10, q?: string, skip: number = 0): Cik[] 
 export function getCikDetails(cik?: string, quarter?: string): Cik[] {
 	const sql = `
     SELECT
-      cik,
-      quarter,
-      ttl_value_per_cik_per_qtr AS value,
-      num_assets_per_cik_per_qtr AS num_assets,
-      mean_curr_twrr_per_cik_per_qtr_cons AS curr_twrr,
-      cum_mean_twrr_per_cik_per_qtr_cons AS cum_twrr
+        cik,
+        quarter,
+        ttl_value_per_cik_per_qtr AS value,
+        num_assets_per_cik_per_qtr AS num_assets,
+        mean_curr_twrr_per_cik_per_qtr_cons AS curr_twrr,
+        cum_mean_twrr_per_cik_per_qtr_cons AS cum_twrr
     FROM every_cik_qtr_twrr
-    WHERE cik = $cik AND quarter = ${
-			quarter ? '$quarter' : '(SELECT MAX(quarter) FROM every_cik_qtr_twrr WHERE cik = $cik)'
+    WHERE ($cik IS NULL OR cik = $cik) AND quarter = ${
+			quarter ? '$quarter' : '(SELECT MAX(quarter) FROM every_cik_qtr_twrr)'
 		}
-  `;
+`;
 	const stmnt = db.prepare(sql);
 	const rows = stmnt.all({ cik, quarter });
 	console.log(rows.slice(0, 2));

@@ -1,5 +1,7 @@
 <script lang="ts">
 	import type { Cik } from "$lib/server/db/types";
+	import { goto } from "$app/navigation";
+	
 	import {
 		createTable,
 		Subscribe,
@@ -15,7 +17,7 @@
 		addHiddenColumns,
 		
 	} from "svelte-headless-table/plugins";
-	import { readable, writable } from "svelte/store";
+	import { readable, writable, type Writable } from "svelte/store";
 	import * as Table from "$lib/components/ui/table";
 	import Actions from "./data-table-actions.svelte";
 	import { Button } from "$lib/components/ui/button";
@@ -23,41 +25,54 @@
 	import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
 	import { cn } from "$lib/utils";
 	import { Input } from "$lib/components/ui/input";
-	import DataTableCheckbox from "./data-table-checkbox.svelte";
 
+	
 	export let totalRowCount = 0;
 	export let page = 0;
+	export let totalPages = 0;
+	export let pageSize = 10;
+	export let filter: string = "";
+
+	const paramsUpdate = () => {
+		
+		goto(`/shadcn-table?limit=${pageSize}&skip=${pageSize * page}&q=${filter}`);
+	};
+	
 
 
-	export let data: Cik[] = [
-		{
-			cik: "2230",
-			cik_name: "Success",
-			quarter: "2020Q1",
-			cum_twrr: 45454545, 
-			value: 123,
-		},
-		{
-			cik: "2250",
-			cik_name: "down",
-			quarter: "2020Q2",
-			cum_twrr: 454.34, 
-			value: 12334,
-		},
-
-	];
+	export let data: Cik[]; 
+	// = [
+	// 	{
+	// 		id: 1,
+	// 		cik: "2230",
+	// 		cik_name: "Success",
+	// 		quarter: "2020Q1",
+	// 		cum_twrr: 45454545, 
+	// 		value: 123,
+	// 	},
+	// 	{
+	// 		id: 2,
+	// 		cik: "2250",
+	// 		cik_name: "down",
+	// 		quarter: "2020Q2",
+	// 		cum_twrr: 454.34, 
+	// 		value: 12334,
+	// 	},
+	// ];
 
 	// export let data;
+	const entries: Writable<Cik[]> = writable([]);
+	$: $entries = data;
 
-	const table = createTable(readable(data), {
+	const table = createTable(entries, {
 		sort: addSortBy({
 			serverSide: true,
 			toggleOrder: ['desc', 'asc']
 		}),
 		page: addPagination({
-			// initialPageSize: 8,
+			initialPageSize: 6,
 			serverSide: true,
-			serverItemCount: writable(totalRowCount) 
+			serverItemCount: writable(totalRowCount) ,
 		}),
 		filter: addTableFilter({
 			fn: ({ filterValue, value }) => value.includes(filterValue)
@@ -68,21 +83,9 @@
 
 	const columns = table.createColumns([
 
-		table.column({
-			header: "CIK",
-			accessor: "cik",
-			plugins: { sort: { disable: false }, filter: { exclude: true } }
-		}),
-		table.column({ header: "Name", accessor: "cik_name" }),
-		table.column({
-			header: "Cumulative TWRR",
-			accessor: "cum_twrr",
-			cell: ({ value }) => {
-				const formatted = new Intl.NumberFormat("en-US", {
-					style: "percent"
-				}).format(value);
-				return formatted;
-			},
+	table.column({
+			header: "ID",
+			accessor: "id",
 			plugins: {
 				sort: {
 					disable: true
@@ -92,6 +95,13 @@
 				}
 			}
 		}),
+	
+		table.column({
+			header: "CIK",
+			accessor: "cik",
+			plugins: { sort: { disable: false }, filter: { exclude: true } }
+		}),
+		table.column({ header: "Superinvestor", accessor: "cik_name" }),
 		table.column({
 			header: "Actions",
 			accessor: ({ cik }) => cik,
@@ -126,31 +136,38 @@
 		.filter(([, hide]) => !hide)
 		.map(([id]) => id);
 
-	const { hasNextPage, hasPreviousPage, pageIndex, pageCount, pageSize } = pluginStates.page;
+	const { hasNextPage, hasPreviousPage, pageIndex, pageCount } = pluginStates.page;
 	const { filterValue } = pluginStates.filter;
-
 	const { selectedDataIds } = pluginStates.select;
 
-	async function updateQuery() {
-		const q = new URLSearchParams();
-		q.set('order_by', $sortKeys[0].id);
-		q.set('order_dir', $sortKeys[0].order);
-		q.set('filter', $filterValue);
-		q.set('limit', String($pageSize));
-		q.set('skip', String($pageSize * $pageIndex));
-	};
+
+	// $: $pageIndex = page;
+	$: serverItemCount = totalRowCount;
+
+	// async function updateQuery() {
+	// 	const q = new URLSearchParams();
+	// 	q.set('order_by', $sortKeys[0].id);
+	// 	q.set('order_dir', $sortKeys[0].order);
+	// 	q.set('filter', $filterValue);
+	// 	q.set('limit', String($pageSize));
+	// 	q.set('skip', String($pageSize * $pageIndex));
+	// };
 
 	const hideableCols = ["status", "email", "amount"];
+	$: filter = $filterValue;
 </script>
 
 <div class="w-full">
 	<div class="mb-4 flex items-center gap-4">
 		<Input
-			class="max-w-sm"
-			placeholder="Filter emails..."
-			type="text"
-			bind:value={$filterValue}
-		/>
+		class="max-w-sm" autofocus
+		placeholder="Filter superinvestors..."
+		type="search"
+		bind:value={filter}
+		on:input={() => 
+			goto(`/shadcn-table?limit=${pageSize}&skip=${pageSize * $pageIndex}&q=${filter}`)} 
+	/>
+	
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger asChild let:builder>
 				<Button variant="outline" class="ml-auto" builders={[builder]}>
@@ -242,24 +259,28 @@
 			{Object.keys($selectedDataIds).length} of{" "}
 			{$rows.length} row(s) selected.
 		</div>
-		<Button
+		<Button 
 			variant="outline"
-			size="sm"
-			on:click={() => ($pageIndex = $pageIndex - 1)}
-			disabled={!$hasPreviousPage}>Previous</Button
-		>
+			size="sm" 
+			on:click={() => {$pageIndex = $pageIndex - 1;
+							goto(`/shadcn-table?limit=${pageSize}&skip=${pageSize * $pageIndex}&q=${filter}`);}}
+			disabled={!$hasPreviousPage}>Previous</Button>
 		<div class="flex text-sm text-muted-foreground">
 			{$pageIndex + 1} of {$pageCount} Pages			
 		<!-- <span> {$pageIndex + 1} out of {$pageCount}</span> -->
 		</div>
-<Button
+
+		<Button
 			variant="outline"
 			size="sm"
 			disabled={!$hasNextPage}
 			on:click={() => {
 				$pageIndex = $pageIndex + 1;
-				updateQuery();
+				goto(`/shadcn-table?limit=${pageSize}&skip=${pageSize * $pageIndex}&q=${filter}`);
 			}}>Next</Button
 		>
 	</div>
 </div>
+
+
+<!-- #TODO: Server side search and paginatin mostly work, but needs refinement. Sort is not implemented yet at all -->

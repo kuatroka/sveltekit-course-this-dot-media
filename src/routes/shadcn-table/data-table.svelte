@@ -1,22 +1,12 @@
 <script lang="ts">
 	import type { Cik } from "$lib/server/db/types";
 	import { goto } from "$app/navigation";
+	import { page } from '$app/stores'
+	import debounce from 'debounce';	
 	
-	import {
-		createTable,
-		Subscribe,
-		Render,
-		createRender,
-		
-	} from "svelte-headless-table";
-	import {
-		addSortBy,
-		addPagination,
-		addTableFilter,
-		addSelectedRows,
-		addHiddenColumns,
-		
-	} from "svelte-headless-table/plugins";
+	import {createTable, Subscribe, Render,	createRender} from "svelte-headless-table";
+	import {addSortBy, addPagination,	addTableFilter,
+		addSelectedRows,addHiddenColumns	} from "svelte-headless-table/plugins";
 	import { readable, writable, type Writable } from "svelte/store";
 	import * as Table from "$lib/components/ui/table";
 	import Actions from "./data-table-actions.svelte";
@@ -27,40 +17,15 @@
 	import { Input } from "$lib/components/ui/input";
 
 	
-	export let totalRowCount = 0;
-	export let page = 0;
-	export let totalPages = 0;
-	export let pageSize = 10;
-	export let filter: string = "";
-
-	const paramsUpdate = () => {
-		
-		goto(`/shadcn-table?limit=${pageSize}&skip=${pageSize * page}&q=${filter}`);
-	};
-	
+	export let totalRowCount =  0;
+	export let _pageSize = 5;
+	// export let filter: string = "";
+	export let order_by: string = "";
+	export let order_dir: string = "";
 
 
 	export let data: Cik[]; 
-	// = [
-	// 	{
-	// 		id: 1,
-	// 		cik: "2230",
-	// 		cik_name: "Success",
-	// 		quarter: "2020Q1",
-	// 		cum_twrr: 45454545, 
-	// 		value: 123,
-	// 	},
-	// 	{
-	// 		id: 2,
-	// 		cik: "2250",
-	// 		cik_name: "down",
-	// 		quarter: "2020Q2",
-	// 		cum_twrr: 454.34, 
-	// 		value: 12334,
-	// 	},
-	// ];
 
-	// export let data;
 	const entries: Writable<Cik[]> = writable([]);
 	$: $entries = data;
 
@@ -70,7 +35,7 @@
 			toggleOrder: ['desc', 'asc']
 		}),
 		page: addPagination({
-			initialPageSize: 6,
+			// initialPageSize: 6,
 			serverSide: true,
 			serverItemCount: writable(totalRowCount) ,
 		}),
@@ -82,7 +47,6 @@
 	});
 
 	const columns = table.createColumns([
-
 	table.column({
 			header: "ID",
 			accessor: "id",
@@ -99,7 +63,7 @@
 		table.column({
 			header: "CIK",
 			accessor: "cik",
-			plugins: { sort: { disable: false }, filter: { exclude: true } }
+			plugins: { sort: { disable: false }, filter: { exclude: false } }
 		}),
 		table.column({ header: "Superinvestor", accessor: "cik_name" }),
 		table.column({
@@ -136,13 +100,11 @@
 		.filter(([, hide]) => !hide)
 		.map(([id]) => id);
 
-	const { hasNextPage, hasPreviousPage, pageIndex, pageCount } = pluginStates.page;
+	const { hasNextPage, hasPreviousPage, pageIndex, pageCount, pageSize } = pluginStates.page;
 	const { filterValue } = pluginStates.filter;
 	const { selectedDataIds } = pluginStates.select;
 
-
-	// $: $pageIndex = page;
-	$: serverItemCount = totalRowCount;
+	// $: serverItemCount = totalRowCount;
 
 	// async function updateQuery() {
 	// 	const q = new URLSearchParams();
@@ -154,19 +116,44 @@
 	// };
 
 	const hideableCols = ["status", "email", "amount"];
+
 	$: filter = $filterValue;
+	$: _pageIndex = $pageIndex;
+	$: _sortKeys = $sortKeys;
+
+	$pageSize = 5
+	$: _pageSize = $pageSize
+
+	$: _totalPages = Math.ceil(totalRowCount / _pageSize)
+	$: _totalViewedPages = (_pageIndex + 1) * _pageSize
+
+	$: _currentPage = $pageIndex + 1
+
+
+	$: _hasNextPage = _currentPage !== _totalPages;
+
+	$: order_by = _sortKeys[0]?.id || '';
+	$: order_dir = _sortKeys[0]?.order || '';
+
+	const handleFilterChange = debounce(() => {
+    goto(`/shadcn-table?limit=${_pageSize}&skip=${_pageSize * _pageIndex}&q=${filter}&order_by=${order_by}&order_dir=${order_dir}`,
+		{  replaceState: true, keepFocus: true });
+  }, 200);
+
 </script>
+
 
 <div class="w-full">
 	<div class="mb-4 flex items-center gap-4">
 		<Input
-		class="max-w-sm" autofocus
+		class="max-w-sm" 
 		placeholder="Filter superinvestors..."
 		type="search"
 		bind:value={filter}
-		on:input={() => 
-			goto(`/shadcn-table?limit=${pageSize}&skip=${pageSize * $pageIndex}&q=${filter}`)} 
+		on:input={handleFilterChange} 
 	/>
+
+
 	
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger asChild let:builder>
@@ -211,7 +198,10 @@
 										{:else}
 											<Button
 												variant="ghost"
-												on:click={props.sort.toggle}
+												on:click={(e) => {
+													props.sort.toggle(e);
+													handleFilterChange();
+												}}
 											>
 												<Render of={cell.render()} />
 												<CaretSort
@@ -256,27 +246,27 @@
 	</div>
 	<div class="flex items-center justify-end space-x-2 py-4">
 		<div class="flex-1 text-sm text-muted-foreground">
-			{Object.keys($selectedDataIds).length} of{" "}
-			{$rows.length} row(s) selected.
+			{_totalViewedPages} of 
+			{totalRowCount} Entries
 		</div>
 		<Button 
 			variant="outline"
 			size="sm" 
 			on:click={() => {$pageIndex = $pageIndex - 1;
-							goto(`/shadcn-table?limit=${pageSize}&skip=${pageSize * $pageIndex}&q=${filter}`);}}
+							handleFilterChange();}}
 			disabled={!$hasPreviousPage}>Previous</Button>
 		<div class="flex text-sm text-muted-foreground">
-			{$pageIndex + 1} of {$pageCount} Pages			
+			{$pageIndex + 1} of {_totalPages} Pages			
 		<!-- <span> {$pageIndex + 1} out of {$pageCount}</span> -->
 		</div>
 
 		<Button
 			variant="outline"
 			size="sm"
-			disabled={!$hasNextPage}
+			disabled={!_hasNextPage}
 			on:click={() => {
 				$pageIndex = $pageIndex + 1;
-				goto(`/shadcn-table?limit=${pageSize}&skip=${pageSize * $pageIndex}&q=${filter}`);
+				handleFilterChange();
 			}}>Next</Button
 		>
 	</div>

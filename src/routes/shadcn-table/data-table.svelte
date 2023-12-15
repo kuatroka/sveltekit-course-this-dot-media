@@ -140,6 +140,9 @@
 		{  replaceState: true, keepFocus: true });
   }, 200);
 
+// TODO: Displayed entries and pages are wrong when clicking next multiple Times
+// and then using search box. The paging gets all messed up
+
 </script>
 
 

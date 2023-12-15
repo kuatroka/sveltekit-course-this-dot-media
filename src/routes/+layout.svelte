@@ -12,9 +12,7 @@
 	<nav class="flex gap-8">
 		<a href="/">Home</a>
 		<a href="/about">About</a>
-		<a href="/superinvestors">Superinvestors</a>
 		<a href="/characters">Characters</a>
-		<a href="/search">Search</a>
 	</nav>
 
 	<Button on:click={toggleMode} variant="outline" size="icon">

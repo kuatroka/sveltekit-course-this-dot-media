@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
+
 export type DetailedCharacter = {
 	id: number;
 	name: string;
@@ -23,7 +23,7 @@ export type DetailedCharacter = {
 const API = 'https://svelte.fun/api/bobs-burgers';
 export const load = async ({ fetch, params }) => {
 	const { id } = params;
-	const response = await fetch(`${API}/characters/${id}`);
+	const response = await fetch(`/api/characters/${id}`);
 
 	if (!response.ok) {
 		const err = await response.json();

@@ -3,6 +3,7 @@
 </script>
 
 <nav class="flex justify-center px-4 space-x-4">
+	<a href="/">Home</a>
 	<a href="/shadcn-table">shadcn-table</a>
 	<a href="/pagination-ssr-cik">pagination-ssr-cik</a>
 	<a href="/no-data-reload-from-layout">Use data from layout</a>

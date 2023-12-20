@@ -34,6 +34,7 @@
 		}),
 		page: addPagination({
 			serverSide: true,
+			serverItemCount: writable(data[0].num_entries),
 		}),
 		filter: addTableFilter({
 			serverSide: true,
@@ -123,7 +124,6 @@
 
 	const { selectedDataIds } = pluginStates.select;
 
-	// $: serverItemCount = totalRowCount;
 
 	// async function updateQuery() {
 	// 	const q = new URLSearchParams();
@@ -243,7 +243,7 @@ $pageRows.length:    {$pageRows.length} <br> -->
 										{...attrs}
 									>
 									{#if cell.id === 'cik_name'}
-										<a href="/{row.cells.find(c => c.id === 'cik').value}" 
+										<a href="/{row.cells.find(c => c.id === 'cik')?.value}" 
 										class="line-clamp-1">{cell.value}</a>
 									{:else}
 										<Render of={cell.render()} />

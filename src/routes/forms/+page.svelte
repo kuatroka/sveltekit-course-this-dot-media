@@ -12,6 +12,38 @@
   </svelte:head>
   
   <h1>Movie Log</h1>
+
+<!-- form -->
+<form method="post">
+	<label>
+		<span>Name:</span>
+		<input type="text" name="name">
+	</label>
+
+	<label>
+		<span>Release:</span>
+		<input type="text" name="release">
+	</label>
+
+	<label for="rating">Rating</label>
+	<select name="rating" id="rating">
+		<option>Select a rating</option>
+		<option value="1">1 Stars ⭐️</option>
+		<option value="2">2 Stars ⭐️⭐️</option>
+		<option value="3">3 Stars ⭐️⭐️⭐️</option>
+		<option value="4">4 Stars ⭐️⭐️⭐️⭐️</option>
+		<option value="5">5 Stars ⭐️⭐️⭐️⭐️⭐️</option>
+	</select>
+
+	<label for="comment">Comment:</label>
+	<textarea name="comment" id="comment" placeholder="What did you think?"/>
+
+	<div class="submission">
+		<span class="error"/>
+		<button type="submit">Log The Movie</button>
+	</div>
+</form>
+
   
   <table>
     <thead>
@@ -203,6 +235,7 @@ label {
 	display: inline-block;
 	font: bold 1.2rem sans-serif;
 	margin-top: 0.5rem;
+
 }
 
 input:not([type]),
@@ -216,6 +249,8 @@ textarea {
 	box-sizing: border-box;
 	width: 100%;
 	padding: 0.5rem 0.75rem;
+	border: 1px solid grey;
+	border-radius: 5px;
 }
 
 textarea {

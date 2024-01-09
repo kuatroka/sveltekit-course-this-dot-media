@@ -33,8 +33,8 @@
 			toggleOrder: ['desc', 'asc']
 		}),
 		page: addPagination({
+			serverItemCount: writable(data[0].num_entries ),
 			serverSide: true,
-			serverItemCount: writable(data[0].num_entries),
 		}),
 		filter: addTableFilter({
 			serverSide: true,

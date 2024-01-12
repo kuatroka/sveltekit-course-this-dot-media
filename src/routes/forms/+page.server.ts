@@ -1,3 +1,4 @@
+import { error, fail, redirect } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 
 type Movie = {
@@ -8,7 +9,7 @@ type Movie = {
 	comment?: string;
 };
 
-const movies: Movie[] = [
+let movies: Movie[] = [
 	{
 		id: 'df5105ff-9d87-4bd9-be62-4743c0a243b9',
 		name: 'Everything Everywhere All at Once',
@@ -31,9 +32,82 @@ export const load: PageServerLoad = () => {
 	};
 };
 
-export const actions: Actions = {
-	async default({ request }) {
-		const formData = await request.formData();
+const validateMovie = (movieData: Partial<Movie>) : 
+	{success: false, error: string } | {success: true, movie: Omit<Movie, 'id'>} => {
+		if (!movieData.name ) {
+			return {
+				success: false,
+				error: 'Name of the Movie is required'
+			};
+		}
+
+		if (!movieData.release ) {
+			return {
+				success: false,
+				error: 'Release is required'
+			};
+		}
+
+		if (!movieData.rating ) {
+			return {
+				success: false,
+				error: 'Rating is required'
+			};
+		}
 		
+	
+	return {
+		success: true,
+		movie: {
+			name: movieData.name,
+			release: movieData.release,
+			rating: movieData.rating,
+			comment: movieData.comment
+		}	
+	};
+
+};
+	
+
+export const actions: Actions = {
+	async logMovie({ request }) {
+		const formData = await request.formData();
+
+		// console.log(formData);
+
+		const movieData = {
+			name: (formData.get('name') ?? '') as string,
+			release: (formData.get('release') ??  Number(formData.get('release'))) as number,
+			rating: (formData.get('rating') ??  Number(formData.get('rating'))) as number,
+			comment: formData.get('comment') ?  formData.get('comment') as string : undefined,
+		}
+
+		const validation = validateMovie(movieData);
+		if (!validation.success) {
+			return fail(400, {
+				error: validation.error,
+				...movieData
+			});
+		}
+
+		movies.push({
+			id: crypto.randomUUID(),
+			...movieData
+		})
+
+
+		// console.log(movies);
+		// throw redirect(303, '/forms');
+		
+		// return { success: true,
+		// 	movie: validation.movie
+		// };		
+	},
+	
+	async deleteMovie({ request }) {
+		const movieId = (await request.formData()).get('movieToDelete');
+		movies = movies.filter(m => m.id !== movieId);
+		console.log(movieId);
+		// throw redirect(303, '/forms');
 	}
 }

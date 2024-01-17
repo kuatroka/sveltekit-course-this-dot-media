@@ -9,7 +9,7 @@
 		addSelectedRows,addHiddenColumns, addResizedColumns	} from "svelte-headless-table/plugins";
 	import { readable, writable, type Writable } from "svelte/store";
 	import * as Table from "$lib/components/ui/table";
-	import Actions from "./data-table-actions.svelte";
+	import  Actions  from "./data-table-actions.svelte";
 	import { Button } from "$lib/components/ui/button";
 	import { CaretSort, ChevronDown, ChevronUp } from "radix-icons-svelte";
 	import { X, ArrowUpDown } from 'lucide-svelte';
@@ -134,7 +134,7 @@
 	// 	q.set('skip', String($pageSize * $pageIndex));
 	// };
 
-	const hideableCols = ["id", "cik"];
+	const hideableCols = ["cum_twrr_cons", "cik"];
 	$: _sortKeys = $sortKeys;
 	
 	$: _totalViewedEntries = ($pageIndex * $pageSize + $pageRows.length)
@@ -148,7 +148,7 @@
 	const handleFilterChange = debounce(() => {
 	goto(`/shadcn-table?limit=${$pageSize}&skip=${$pageSize * $pageIndex}&q=${filter}&order_by=${order_by}&order_dir=${order_dir}`,
 		{  replaceState: true, keepFocus: true });
-  }, 100);
+  }, 200);
 
 // TODO: Displayed entries and pages are wrong when clicking next multiple Times
 // and then using search box. The paging gets all messed up
@@ -243,7 +243,8 @@ $pageRows.length:    {$pageRows.length} <br> -->
 										{...attrs}
 									>
 									{#if cell.id === 'cik_name'}
-										<a href="/{row.cells.find(c => c.id === 'cik')?.value}" 
+										<!-- <a href="/{row.cells.find(c => c.id === 'cik')?.value}"  -->
+										<a href="/{row.cells[0].value}" 
 										class="line-clamp-1">{cell.value}</a>
 									{:else}
 										<Render of={cell.render()} />

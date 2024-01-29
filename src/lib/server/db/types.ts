@@ -9,7 +9,6 @@ export type Cik = {
 	num_entries: number;
 	id: number;
 	cik: string;
-	cik_name: string;
 	cum_twrr_cons: number;
 	value: number;
 	quarter: string;

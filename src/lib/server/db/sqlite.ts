@@ -15,11 +15,16 @@ export function getCik(
 		SELECT
 		COUNT(*) OVER () AS num_entries,
 		id,
-		cik,
-		cik_name,
+		l.cik AS cik,
+		r.cik_name AS  cik_name,
 		cum_mean_twrr_per_cik_per_qtr_cons AS cum_twrr_cons,
+		cum_mean_twrr_per_cik_per_qtr_yahoo AS cum_twrr_yahoo,
 		(select count(*) from cik_md) AS initial_num_entries
-		FROM every_cik_latest_qtr_stats
+		FROM every_cik_latest_qtr_stats l
+		LEFT JOIN
+		(SELECT cik, cik_name
+		FROM cik_md) r
+		ON l.cik = r.cik
 		WHERE UPPER(cik_name) LIKE UPPER('%${q}%')
 		ORDER BY ${order_by ? order_by : 'cik'} ${order_dir ? order_dir : 'ASC'}
 		LIMIT $limit OFFSET $skip

@@ -6,8 +6,8 @@
 	<a href="/">Home</a>
 	<a href="/shadcn-table">shadcn-table</a>
 	<a href="/pagination-ssr-cik">pagination-ssr-cik</a>
-	<!-- <a href="/search-params">Search Params</a> -->
 	<a href="/forms">forms</a>
+	<a href="/login">login</a>
 </nav>
 
 <main>

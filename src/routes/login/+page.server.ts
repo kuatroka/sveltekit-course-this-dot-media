@@ -1,12 +1,12 @@
 import type { PageServerLoad, Actions } from './$types';
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 
 export const load = (async () => {
 	return {};
 }) satisfies PageServerLoad;
 
 export const actions = {
-	login: async ({ request }) => {
+	login: async ({ request, cookies }) => {
 		const formDdata = await request.formData();
 		const username = formDdata.get('username');
 		const password = formDdata.get('password');
@@ -32,5 +32,22 @@ export const actions = {
 				}
 			});
 		}
+
+		// admin login
+		if (username == 'admin' && password !== 'password') {
+			return fail(401, {
+				username: {
+					value: username,
+					error: null
+				},
+				password: {
+					value: password,
+					error: 'That username an password combination is not valid'
+				}
+			});
+		}
+
+		cookies.set('session', username, { path: '/' });
+		throw redirect(303, '/');
 	}
 };

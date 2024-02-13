@@ -5,3 +5,9 @@
 // 		ciks_details: getCikDetails()
 // 	};
 // };
+
+export const load = async ({ locals }) => {
+	return {
+		user: locals.user
+	};
+};
